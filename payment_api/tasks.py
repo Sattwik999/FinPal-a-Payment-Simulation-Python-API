@@ -2,6 +2,7 @@ from .celery_app import celery_app
 from .database import SessionLocal
 from .models import Payment, User
 
+
 @celery_app.task(name='payment.send_receipt')
 def send_payment_receipt_email(payment_id: int) -> bool:
 	db = SessionLocal()

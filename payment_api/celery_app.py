@@ -1,5 +1,7 @@
 from celery import Celery
+
 from .config import get_settings
+
 settings = get_settings()
 celery_app = Celery("payment_api", broker=settings.REDIS_URL,
 backend=settings.REDIS_URL)

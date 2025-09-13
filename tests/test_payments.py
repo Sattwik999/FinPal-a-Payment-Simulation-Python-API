@@ -1,5 +1,6 @@
 from payment_api.models import User
 
+
 def test_payment_flow(client, db_session):
 	# create payer
 	r = client.post("/users/", json={"name": "payer", "balance": 100.0})

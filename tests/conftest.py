@@ -1,11 +1,13 @@
 import os
 import time
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from payment_api.main import app
+
 from payment_api.database import Base, get_db
+from payment_api.main import app
 
 DATABASE_URL = os.environ.get(
     "DATABASE_URL",

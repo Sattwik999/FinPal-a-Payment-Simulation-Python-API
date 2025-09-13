@@ -1,5 +1,8 @@
-from pydantic import BaseModel
 from datetime import datetime
+
+from pydantic import BaseModel
+
+
 class UserCreate(BaseModel):
     name: str
     balance: float = 0.0

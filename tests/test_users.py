@@ -1,5 +1,6 @@
 from payment_api.models import User
 
+
 def test_create_user(client, db_session):
 	res = client.post("/users/", json={"name": "alice", "balance": 100.0})
 	assert res.status_code == 200

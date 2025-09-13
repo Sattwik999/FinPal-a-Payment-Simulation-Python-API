@@ -1,11 +1,11 @@
-from sqlalchemy.orm import Session
-from sqlalchemy.exc import IntegrityError
-from ..models import User, Payment
+
 from typing import Optional
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
+from ..models import Payment, User
 
 class PaymentError(Exception):
     pass
-
 
 def create_payment(db: Session, payer_id: int, payee_id: int, amount: float, currency: str = "USD", idempotency_key: Optional[str] = None) -> Payment:
     # idempotency check
@@ -24,7 +24,13 @@ def create_payment(db: Session, payer_id: int, payee_id: int, amount: float, cur
             if payer.balance < amount:
                 raise PaymentError("Insufficient balance")
 
-            payment = Payment(payer_id=payer_id, payee_id=payee_id, amount=amount, currency=currency, idempotency_key=idempotency_key)
+            payment = Payment(
+                payer_id=payer_id,
+                payee_id=payee_id,
+                amount=amount,
+                currency=currency,
+                idempotency_key=idempotency_key,
+            )
             db.add(payment)
             # commit happens automatically by context manager
             return payment
@@ -32,7 +38,6 @@ def create_payment(db: Session, payer_id: int, payee_id: int, amount: float, cur
         # could happen if idempotency key is duplicated
         db.rollback()
         raise PaymentError("Database integrity error") from e
-
 
 def complete_payment(db: Session, payment_id: int) -> Payment:
     try:
@@ -50,10 +55,9 @@ def complete_payment(db: Session, payment_id: int) -> Payment:
             payment.status = "completed"
             # return the payment object
             return payment
-    except Exception as err:
+    except Exception:
         db.rollback()
-        raise err
-
+        raise
 
 def cancel_payment(db: Session, payment_id: int) -> Payment:
     with db.begin():
@@ -63,6 +67,6 @@ def cancel_payment(db: Session, payment_id: int) -> Payment:
         payment.status = "cancelled"
         return payment
 
-
 def get_payment(db: Session, payment_id: int) -> Optional[Payment]:
+
     return db.query(Payment).get(payment_id)

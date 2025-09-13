@@ -1,7 +1,11 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime
-from sqlalchemy.orm import relationship
 from datetime import datetime
+
+from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
+
 from .database import Base
+
+
 class User(Base):
  __tablename__ = "users"
  id = Column(Integer, primary_key=True)
@@ -25,9 +29,9 @@ class Payment(Base):
  updated_at = Column(DateTime, default=datetime.utcnow,
  onupdate=datetime.utcnow, nullable=False)
  idempotency_key = Column(String, unique=True, nullable=True)
- 
+
  payer = relationship("User", foreign_keys=[payer_id],
  back_populates="payments_sent")
- 
+
  payee = relationship("User", foreign_keys=[payee_id],
 back_populates="payments_received")
