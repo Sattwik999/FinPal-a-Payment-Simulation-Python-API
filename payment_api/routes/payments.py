@@ -33,7 +33,7 @@ def create_payment(
         db.refresh(pay)
         return pay
     except PaymentError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
 
 @router.post("/{pid}/complete")
 def complete_payment(
@@ -57,7 +57,7 @@ def complete_payment(
         db.commit()
         return {"message": "Payment completed"}
     except PaymentError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
 
 @router.post("/{pid}/cancel")
 def cancel_payment(
@@ -75,7 +75,7 @@ def cancel_payment(
         db.commit()
         return {"message": "Payment cancelled"}
     except PaymentError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
 
 @router.get("/{pid}", response_model=schemas.PaymentOut)
 def get_payment(

@@ -31,7 +31,7 @@ def create_payment(db: Session, payer_id: int, payee_id: int, amount: float, cur
     except IntegrityError as e:
         # could happen if idempotency key is duplicated
         db.rollback()
-        raise PaymentError("Database integrity error")
+        raise PaymentError("Database integrity error") from e
 
 
 def complete_payment(db: Session, payment_id: int) -> Payment:
@@ -50,9 +50,9 @@ def complete_payment(db: Session, payment_id: int) -> Payment:
             payment.status = "completed"
             # return the payment object
             return payment
-    except Exception:
+    except Exception as err:
         db.rollback()
-        raise
+        raise err
 
 
 def cancel_payment(db: Session, payment_id: int) -> Payment:
