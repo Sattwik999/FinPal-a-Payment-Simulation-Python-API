@@ -1,0 +1,9 @@
+[tool.black]
+line-length = 88
+include = '\.pyi?$'
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "C", "N", "I", "B"]
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

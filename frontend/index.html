@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment API Simulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Payment API Simulation</h1>
+        <div id="register-section">
+            <h2>Register</h2>
+            <input type="text" id="register-name" placeholder="Name">
+            <input type="number" id="register-balance" placeholder="Initial Balance">
+            <button onclick="registerUser()">Register</button>
+            <div id="register-result"></div>
+        </div>
+        <div id="login-section">
+            <h2>Login</h2>
+            <input type="text" id="api-key" placeholder="API Key">
+            <button onclick="loginUser()">Login</button>
+            <div id="login-result"></div>
+        </div>
+        <div id="dashboard-section" style="display:none;">
+            <h2>Dashboard</h2>
+            <div id="user-info"></div>
+            <h3>Create Payment</h3>
+            <input type="number" id="payment-amount" placeholder="Amount">
+            <input type="text" id="payment-recipient" placeholder="Recipient Name">
+            <button onclick="createPayment()">Create Payment</button>
+            <div id="payment-result"></div>
+            <h3>Payment History</h3>
+            <div id="payment-history"></div>
+            <button onclick="logoutUser()">Logout</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
