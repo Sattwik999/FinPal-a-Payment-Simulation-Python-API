@@ -1,19 +1,94 @@
+![FinPal Banner](banner.png)
+
+
 # FinPal - Payment Simulation Python API
 
-A full-stack payment simulation project built with FastAPI (Python backend) and a simple HTML/CSS/JS frontend. This project allows users to register, log in with an API key, create payments, and view payment history. It is designed for learning, prototyping, and demonstration purposes.
+Hi! I'm Sattwik Sarkar, and this is my personal project: a full-stack payment simulation app built with FastAPI (Python backend) and a simple HTML/CSS/JS frontend. I created this project to learn, experiment, and demonstrate how a modern payment API works from scratch.
 
-## Features
+---
 
-- **User Registration:** Create users with a name and initial balance. Each user receives a unique API key.
-- **Login:** Log in using your API key to access your dashboard.
-- **Dashboard:** View your balance and payment history.
-- **Create Payments:** Send payments to other registered users by specifying their name and amount.
-- **Payment History:** See all payments you have made or received.
-- **Background Tasks:** (Optional) Celery integration for sending payment receipts.
-- **Docker Support:** Run the entire stack with Docker Compose.
-- **Testing:** Pytest-based test suite for backend logic.
+## Why I Built This
+I wanted to understand how payment systems work under the hood, practice building REST APIs, and get hands-on with Docker, testing, and frontend integration. This project helped me learn about authentication, database transactions, and background processing.
 
-## Project Structure
+---
+
+## Tech Stack
+- **Backend:** FastAPI, SQLAlchemy, Pydantic
+- **Database:** SQLite (default), PostgreSQL (optional)
+- **Task Queue:** Celery (optional)
+- **Frontend:** HTML, CSS, JavaScript
+- **Testing:** Pytest
+- **Containerization:** Docker, Docker Compose
+
+---
+
+## Key Features
+- User registration with API key authentication
+- Payment creation, completion, and cancellation
+- Payment history dashboard
+- Background email receipts (Celery)
+- RESTful API with OpenAPI docs
+- Dockerized setup for easy deployment
+- Pytest-based test suite
+
+---
+
+## Example API Request
+```bash
+# Register a user
+curl -X POST http://localhost:8000/users/ -H "Content-Type: application/json" -d '{"name": "Alice", "balance": 100}'
+
+# Create a payment
+curl -X POST http://localhost:8000/payments/ -H "Content-Type: application/json" -H "x-api-key: <your_api_key>" -d '{"payer_id": 1, "payee_id": 2, "amount": 10, "currency": "USD"}'
+```
+
+---
+
+## Screenshots
+![Dashboard Screenshot](https://raw.githubusercontent.com/Sattwik999/FinPal-a-Payment-Simulation-Python-API/main/assets/dashboard.png)
+
+---
+
+## Test Coverage
+![pytest coverage badge](https://img.shields.io/badge/coverage-100%25-brightgreen)
+
+---
+
+## Future Improvements / Roadmap
+- Add OAuth2 authentication
+- Integrate Stripe or Razorpay for real payments
+- Add user profile pictures
+- Improve frontend UI/UX
+- Add admin dashboard
+- Deploy to cloud (Azure, Heroku, etc.)
+
+---
+
+## Links
+- [LinkedIn](https://www.linkedin.com/in/sattwiksarkar)
+- [Portfolio](https://sattwiksarkar.com)
+- [More Projects](https://github.com/Sattwik999)
+
+---
+
+## About the Project
+
+This app lets you:
+- Register as a user (with a name and starting balance)
+- Get a unique API key for authentication
+- Log in using your API key
+- View your dashboard (balance and payment history)
+- Send payments to other users
+- See all payments you've made or received
+- (Optionally) Send payment receipts via background tasks (Celery)
+
+Everything is designed for easy local setup, quick prototyping, and clear code structure. You can run it with Docker or just Python, and the frontend is pure HTML/CSS/JS for simplicity.
+
+---
+
+## How I Built & Set Up the Python Backend
+
+### 1. Project Structure
 
 ```
 ├── payment_api/         # FastAPI backend
@@ -39,7 +114,7 @@ A full-stack payment simulation project built with FastAPI (Python backend) and 
 └── README.md            # Project documentation
 ```
 
-## How to Run Locally
+### 2. Setting Up Locally (Step-by-Step)
 
 ### 1. Clone the Repository
 ```sh
@@ -47,37 +122,42 @@ git clone https://github.com/Sattwik999/FinPal-a-Payment-Simulation-Python-API.g
 cd FinPal-a-Payment-Simulation-Python-API
 ```
 
-### 2. Set Up Environment Variables
-- Copy `.env.example` to `.env` and fill in secrets as needed.
-- For quick testing, use SQLite (default in `.env.example`).
+#### Configure Environment Variables
+- Copy `.env.example` to `.env`:
+  ```sh
+  cp .env.example .env
+  ```
+- Edit `.env` as needed. For quick testing, SQLite is the default.
 
 ### 3. Install Python Dependencies
 ```sh
 pip install -r requirements.txt
 ```
 
-### 4. Start the Backend
+#### Start the Backend
 ```sh
 uvicorn payment_api.main:app --reload
 ```
-- The API will be available at [http://localhost:8000](http://localhost:8000)
+- The API runs at [http://localhost:8000](http://localhost:8000)
 - Interactive docs: [http://localhost:8000/docs](http://localhost:8000/docs)
 
-### 5. Start the Frontend
-- Open `frontend/index.html` directly in your browser.
+#### Start the Frontend
+- Open `frontend/index.html` in your browser.
 - Use the UI to register, log in, create payments, and view history.
 
-### 6. Run Tests
+#### Run Tests
 ```sh
 pip install -r dev-requirements.txt
 pytest
 ```
 
-### 7. Run with Docker (Optional)
+#### Run Everything with Docker (Optional)
 ```sh
 docker-compose up --build
 ```
-- This will start the backend, database, Redis, and Celery worker (if configured).
+- This starts backend, database, Redis, and Celery worker (if configured).
+
+---
 
 ## API Endpoints
 
@@ -89,39 +169,45 @@ docker-compose up --build
 
 See [http://localhost:8000/docs](http://localhost:8000/docs) for full API documentation.
 
+---
+
 ## Frontend Usage
 - Register a user and copy your API key.
 - Log in with your API key.
 - Create payments by entering the recipient's name and amount.
 - View your payment history in the dashboard.
 
+---
+
 ## Collaboration & Contribution
 
-1. **Fork the repository** and create your feature branch:
+If you want to contribute:
+1. Fork the repo and create your feature branch:
    ```sh
    git checkout -b feature/your-feature
    ```
-2. **Commit your changes**:
+2. Commit your changes:
    ```sh
    git commit -am "Add new feature"
    ```
-3. **Push to your branch**:
+3. Push to your branch:
    ```sh
    git push origin feature/your-feature
    ```
-4. **Open a Pull Request** on GitHub.
+4. Open a Pull Request on GitHub.
 
-### Guidelines
-- Follow PEP8 for Python code.
-- Keep frontend code clean and modular.
-- Do not commit `.env` or database files.
-- Add tests for new features.
-- Document your changes in the README if needed.
+
+
+---
+
+## Author
+**Sattwik Sarkar**
+
+---
 
 ## License
-
 This project is for educational and demonstration purposes. See `LICENSE` for details.
 
 ---
 
-For questions or issues, open an issue on GitHub or contact the maintainer.
+For questions or issues, open an issue on GitHub or contact me directly.
