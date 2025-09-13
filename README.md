@@ -44,16 +44,6 @@ curl -X POST http://localhost:8000/payments/ -H "Content-Type: application/json"
 
 ---
 
-## Screenshots
-![Dashboard Screenshot](https://raw.githubusercontent.com/Sattwik999/FinPal-a-Payment-Simulation-Python-API/main/assets/dashboard.png)
-
----
-
-## Test Coverage
-![pytest coverage badge](https://img.shields.io/badge/coverage-100%25-brightgreen)
-
----
-
 ## Future Improvements / Roadmap
 - Add OAuth2 authentication
 - Integrate Stripe or Razorpay for real payments
@@ -65,8 +55,8 @@ curl -X POST http://localhost:8000/payments/ -H "Content-Type: application/json"
 ---
 
 ## Links
-- [LinkedIn](https://www.linkedin.com/in/sattwiksarkar)
-- [Portfolio](https://sattwiksarkar.com)
+- [LinkedIn](www.linkedin.com/in/sattwik-sarkar999)
+- [Portfolio](https://sattwiksarkar.me)
 - [More Projects](https://github.com/Sattwik999)
 
 ---
