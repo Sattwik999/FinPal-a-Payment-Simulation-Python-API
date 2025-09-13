@@ -55,9 +55,9 @@ def complete_payment(db: Session, payment_id: int) -> Payment:
             payment.status = "completed"
             # return the payment object
             return payment
-    except Exception:
+    except Exception as e:
         db.rollback()
-        raise
+        raise PaymentError("Database error") from e
 
 def cancel_payment(db: Session, payment_id: int) -> Payment:
     with db.begin():
