@@ -55,8 +55,8 @@ curl -X POST http://localhost:8000/payments/ -H "Content-Type: application/json"
 ---
 
 ## Links
-- [LinkedIn](www.linkedin.com/in/sattwik-sarkar999)
-- [Portfolio](https://sattwiksarkar.me)
+- [LinkedIn](https://www.linkedin.com/in/sattwik-sarkar999)
+- [Portfolio](http://www.sattwiksarkar.me/)
 - [More Projects](https://github.com/Sattwik999)
 
 ---
